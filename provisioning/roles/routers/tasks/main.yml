@@ -1,0 +1,42 @@
+---
+
+- name: Assign hostname
+  cisco.ios.ios_hostname:
+    config:
+      hostname: "{{ hostname }}"
+
+- name: Create Loopback0 on routers
+  cisco.ios.ios_interfaces:
+    config:
+      - name: Loopback0
+        enabled: true
+
+- name: Assign IP address to lo0
+  cisco.ios.ios_l3_interfaces:
+    config:
+      - name: Loopback0
+        ipv4:
+          - address: "{{ addr_loopback }}"
+
+- name: Assign IP addresses to NICs
+  cisco.ios.ios_l3_interfaces:
+    config:
+      - name: GigabitEthernet0/1
+        ipv4:
+          - address: "{{ int1_ip }}"
+      - name: GigabitEthernet0/2
+        ipv4:
+          - address: "{{ int2_ip }}"
+      - name: GigabitEthernet0/3
+        ipv4:
+          - address: "{{ int3_ip }}"
+
+- name: Set interfaces to up
+  cisco.ios.ios_interfaces:
+    config:
+      - name: GigabitEthernet0/1
+        enabled: true
+      - name: GigabitEthernet0/2
+        enabled: true
+      - name: GigabitEthernet0/3
+        enabled: true

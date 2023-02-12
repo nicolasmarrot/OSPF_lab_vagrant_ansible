@@ -1,0 +1,21 @@
+---
+
+- hosts: webservers
+  become: true
+  roles:
+    - webservers
+
+- hosts: routers
+  become: true
+  roles:
+    - routers
+
+- hosts: area0_routers
+  become: true
+  roles:
+    - area0_routers
+
+- hosts: other_routers
+  become: true
+  roles:
+    - other_routers

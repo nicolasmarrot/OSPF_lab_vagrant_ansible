@@ -1,0 +1,16 @@
+---
+
+- name: Install updates
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: true
+
+- name: Install apache
+  ansible.builtin.apt:
+    name: apache2
+    state: latest
+
+- name: Copy website files
+  ansible.builtin.copy:
+    src: 2048-master/
+    dest: /var/www/html/

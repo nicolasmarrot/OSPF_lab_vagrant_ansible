@@ -1,0 +1,19 @@
+---
+
+- name: Configure OSPF
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 110
+          areas:
+            - area_id: "{{ area }}"
+          network:
+            - {address: "{{ areax_network }}", wildcard_bits: "{{ areax_mask }}", area: "{{ area }}"}
+            - {address: "{{ areax_network2 }}", wildcard_bits: "{{ areax_mask2 }}", area: "{{ area }}"}
+
+- name: Redistribute connected subnets into OSPF
+  cisco.ios.ios_command:
+    commands:
+      - "conf t"
+      - "router ospf 110"
+      - "redistribute connected subnets"

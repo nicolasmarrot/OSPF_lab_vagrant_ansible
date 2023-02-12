@@ -1,0 +1,15 @@
+---
+
+- name: Configure OSPF
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 110
+          areas:
+            - area_id: "0"
+            - area_id: "1"
+            - area_id: "2"
+          network:
+            - {address: "{{ area0_network }}", wildcard_bits: "{{ area0_mask }}", area: 0}
+            - {address: "{{ area1_network }}", wildcard_bits: "{{ area1_mask }}", area: 1}
+            - {address: "{{ area2_network }}", wildcard_bits: "{{ area2_mask }}", area: 2}
