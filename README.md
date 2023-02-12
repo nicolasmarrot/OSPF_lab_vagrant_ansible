@@ -1,0 +1,1 @@
+# OSPF_lab_vagrant_ansible
